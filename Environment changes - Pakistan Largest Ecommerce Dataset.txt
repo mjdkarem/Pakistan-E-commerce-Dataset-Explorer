@@ -1,0 +1,10 @@
+# Terminal Environment Changes
+
+## Extension: ms-python.debugpy
+
+Enables use of [no-config debugging](https://github.com/microsoft/vscode-python-debugger/wiki/No%E2%80%90Config-Debugging), `debugpy <script.py>`, in the terminal.
+
+- `PYDEVD_DISABLE_FILE_VALIDATION=1`
+- `VSCODE_DEBUGPY_ADAPTER_ENDPOINTS=c:\Users\majda\.vscode\extensions\ms-python.debugpy-2025.6.0-win32-x64\.noConfigDebugAdapterEndpoints\endpoint-6acb973a9be6598a.txt`
+- `PATH=${env:PATH};c:\Users\majda\.vscode\extensions\ms-python.debugpy-2025.6.0-win32-x64\bundled\scripts\noConfigScripts`
+- `BUNDLED_DEBUGPY_PATH=c:\Users\majda\.vscode\extensions\ms-python.debugpy-2025.6.0-win32-x64\bundled\libs\debugpy`

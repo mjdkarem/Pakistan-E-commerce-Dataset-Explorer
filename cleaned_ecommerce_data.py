@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import zipfile
 
 # --- Page Config ---
 st.set_page_config(page_title="Pakistan E-commerce EDA", layout="wide")
@@ -10,13 +11,15 @@ st.set_page_config(page_title="Pakistan E-commerce EDA", layout="wide")
 # --- Title ---
 st.title("Pakistan E-commerce Dataset Explorer")
 
-
 # --- Read Dataset ---
-data_path = "cleaned_ecommerce_data.csv"
+zip_path = "cleaned_ecommerce_data.zip"  # اسم ملف المضغوط
+csv_filename = "cleaned_ecommerce_data.csv"  # اسم ملف CSV داخل المضغوط
 
 @st.cache_data
 def get_clean_data():
-    df = pd.read_csv(data_path, low_memory=True, engine="python", encoding='utf-8', on_bad_lines='skip')
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        with zip_ref.open(csv_filename) as file:
+            df = pd.read_csv(file, low_memory=True, engine="python", encoding='utf-8', on_bad_lines='skip')
     df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
     if 'created_at' in df.columns:
         df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')
@@ -182,4 +185,3 @@ with tabs[4]:
     Dive deeper into the data with an interactive Tableau dashboard here:  
     👉 [View on Tableau Public](https://public.tableau.com/app/profile/majd.si/viz/PakistanE-commerceDatasetExplorer/Dashboard1)
     """)
-
